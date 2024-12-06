@@ -131,15 +131,30 @@ function Home() {
         sx={{
           bgcolor: 'primary.main',
           color: 'white',
-          py: 8,
+          py: { xs: 4, md: 8 },
           textAlign: 'center',
         }}
       >
-        <Container>
-          <Typography variant="h2" component="h1" gutterBottom>
+        <Container maxWidth="lg">
+          <Typography 
+            variant="h2" 
+            component="h1" 
+            gutterBottom
+            sx={{
+              fontSize: { xs: '2rem', sm: '3rem', md: '3.75rem' },
+              fontWeight: 'bold'
+            }}
+          >
             Rushi Juice Oasis
           </Typography>
-          <Typography variant="h5" component="h2" gutterBottom>
+          <Typography 
+            variant="h5" 
+            component="h2" 
+            gutterBottom
+            sx={{
+              fontSize: { xs: '1.2rem', sm: '1.5rem' }
+            }}
+          >
             Discover the taste of real fruits
           </Typography>
           
@@ -148,12 +163,13 @@ function Home() {
             component="form"
             onSubmit={handleSearch}
             sx={{
-              p: 2,
+              p: { xs: 1, sm: 2 },
               display: 'flex',
+              flexDirection: { xs: 'column', sm: 'row' },
               alignItems: 'center',
               maxWidth: 800,
               margin: '2rem auto',
-              gap: 2,
+              gap: { xs: 1, sm: 2 }
             }}
             elevation={3}
           >
@@ -161,7 +177,7 @@ function Home() {
               value={category}
               onChange={(e) => setCategory(e.target.value)}
               sx={{ 
-                minWidth: 200,
+                minWidth: { xs: '100%', sm: 200 },
                 bgcolor: 'white',
                 '& .MuiSelect-select': {
                   py: 1,
@@ -180,7 +196,13 @@ function Home() {
               placeholder="Search products..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              sx={{ bgcolor: 'white', borderRadius: 1 }}
+              sx={{ 
+                bgcolor: 'white', 
+                borderRadius: 1,
+                '& .MuiOutlinedInput-root': {
+                  height: { xs: '40px', sm: 'auto' }
+                }
+              }}
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
@@ -196,7 +218,8 @@ function Home() {
               color="secondary"
               size="large"
               sx={{ 
-                px: 4,
+                width: { xs: '100%', sm: 'auto' },
+                px: { xs: 2, sm: 4 },
                 py: 1,
                 borderRadius: 2,
               }}
@@ -208,21 +231,41 @@ function Home() {
       </Box>
 
       {/* Featured Juices */}
-      <Container sx={{ py: 8 }}>
-        <Typography variant="h4" component="h2" gutterBottom textAlign="center">
+      <Container sx={{ py: { xs: 4, md: 8 } }}>
+        <Typography 
+          variant="h4" 
+          component="h2" 
+          gutterBottom 
+          textAlign="center"
+          sx={{
+            fontSize: { xs: '1.75rem', sm: '2.125rem' }
+          }}
+        >
           Featured Juices
         </Typography>
-        <Grid container spacing={4} sx={{ mt: 2 }}>
+        <Grid container spacing={{ xs: 2, md: 4 }} sx={{ mt: { xs: 1, md: 2 } }}>
           {featuredJuices.map((juice) => (
             <Grid item xs={12} sm={6} md={4} key={juice.id}>
-              <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+              <Card 
+                sx={{ 
+                  height: '100%', 
+                  display: 'flex', 
+                  flexDirection: 'column',
+                  transition: 'transform 0.3s ease-in-out',
+                  '&:hover': {
+                    transform: 'translateY(-5px)',
+                    boxShadow: 3
+                  }
+                }}
+              >
                 <CardMedia
                   component="img"
-                  height="200"
+                  height={{ xs: 160, sm: 200 }}
                   image={juice.image}
                   alt={juice.name}
+                  sx={{ objectFit: 'cover' }}
                 />
-                <CardContent sx={{ flexGrow: 1 }}>
+                <CardContent sx={{ flexGrow: 1, p: { xs: 1.5, sm: 2 } }}>
                   <Typography gutterBottom variant="h5" component="h3">
                     {juice.name}
                   </Typography>
@@ -231,12 +274,14 @@ function Home() {
                     {juice.price}
                   </Typography>
                 </CardContent>
-                <CardActions>
-                  <Button size="small" color="primary">
+                <CardActions sx={{ p: { xs: 1.5, sm: 2 } }}>
+                  <Button 
+                    size="small" 
+                    color="primary"
+                    variant="contained"
+                    fullWidth
+                  >
                     Add to Cart
-                  </Button>
-                  <Button size="small" color="primary">
-                    Learn More
                   </Button>
                 </CardActions>
               </Card>
@@ -248,7 +293,7 @@ function Home() {
       {/* Best Seller Section */}
       <Box 
         sx={{ 
-          backgroundColor: '#FDB340',  // Solid orange color matching the image
+          backgroundColor: '#FDB340',
           position: 'relative',
           overflow: 'hidden',
           '&::before': {
@@ -261,23 +306,19 @@ function Home() {
             background: 'linear-gradient(180deg, #FDB347 0%, #FFB851 50%, #FDB347 100%)',
             opacity: 0.3,
           },
-          py: 4  // Reduced padding
+          py: { xs: 3, md: 4 }
         }}
       >
-        <Container 
-          sx={{ 
-            position: 'relative',
-            zIndex: 1,
-          }}
-        >
+        <Container maxWidth="lg">
           <Typography 
             variant="h6" 
             component="h2" 
             sx={{ 
-              color: '#2E7D32',  // Darker green for better contrast
+              color: '#2E7D32',
               textAlign: 'center',
               mb: 1,
-              fontWeight: 500
+              fontWeight: 500,
+              fontSize: { xs: '1rem', sm: '1.25rem' }
             }}
           >
             Our Products
@@ -290,21 +331,22 @@ function Home() {
               color: '#1B5E20',
               textAlign: 'center',
               fontWeight: 'bold',
-              mb: 4,
-              textShadow: '1px 1px 2px rgba(0,0,0,0.1)'  // Subtle text shadow
+              mb: { xs: 2, md: 4 },
+              fontSize: { xs: '2rem', sm: '3rem' },
+              textShadow: '1px 1px 2px rgba(0,0,0,0.1)'
             }}
           >
             Best Seller
           </Typography>
 
-          <Grid container spacing={3} alignItems="center">
+          <Grid container spacing={{ xs: 2, md: 3 }} alignItems="center">
             {/* Left side - Image */}
             <Grid item xs={12} md={5}>
               <Box
                 sx={{
-                  width: '300px',
+                  width: { xs: '200px', sm: '300px' },
                   margin: '0 auto',
-                  overflow: 'hidden',  // Contains the zoomed image
+                  overflow: 'hidden',
                 }}
               >
                 <Box
@@ -319,7 +361,7 @@ function Home() {
                     filter: 'drop-shadow(0px 10px 20px rgba(0,0,0,0.15))',
                     transition: 'transform 0.3s ease-in-out',
                     '&:hover': {
-                      transform: 'scale(1.1)',  // 10% zoom on hover
+                      transform: 'scale(1.1)',
                     }
                   }}
                 />
@@ -328,45 +370,62 @@ function Home() {
 
             {/* Right side - Products */}
             <Grid item xs={12} md={7}>
-              <Grid container spacing={1}>
+              <Grid container spacing={{ xs: 1, sm: 2 }}>
                 {bestSellerProducts.map((product) => (
                   <Grid item xs={12} sm={6} key={product.id}>
                     <Card 
                       sx={{ 
                         display: 'flex',
-                        p: 1,
+                        p: { xs: 1, sm: 2 },
                         borderRadius: 2,
-                        backgroundColor: 'rgba(255, 255, 255, 0.9)',  // Slightly transparent white
+                        backgroundColor: 'rgba(255, 255, 255, 0.9)',
                         boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
                         '&:hover': {
                           boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
-                          backgroundColor: 'rgba(255, 255, 255, 1)',  // Full white on hover
-                        }
+                          backgroundColor: 'rgba(255, 255, 255, 1)',
+                        },
+                        flexDirection: { xs: 'column', sm: 'row' },
+                        alignItems: 'center'
                       }}
                     >
                       <CardMedia
                         component="img"
                         sx={{ 
-                          width: 100,
-                          height: 100,
+                          width: { xs: '100%', sm: 100 },
+                          height: { xs: 120, sm: 100 },
                           objectFit: 'contain',
                           borderRadius: 1
                         }}
                         image={product.image}
                         alt={product.name}
                       />
-                      <CardContent sx={{ p: 1, '&:last-child': { pb: 1 } }}>
+                      <CardContent 
+                        sx={{ 
+                          p: { xs: 1, sm: 2 }, 
+                          '&:last-child': { pb: 1 },
+                          width: '100%',
+                          textAlign: { xs: 'center', sm: 'left' }
+                        }}
+                      >
                         <Typography 
                           variant="subtitle1"
                           component="h3"
                           sx={{ 
                             fontWeight: 'bold',
-                            mb: 0.5
+                            mb: 0.5,
+                            fontSize: { xs: '0.9rem', sm: '1rem' }
                           }}
                         >
                           {product.name}
                         </Typography>
-                        <Box sx={{ display: 'flex', alignItems: 'center', mb: 0.5 }}>
+                        <Box 
+                          sx={{ 
+                            display: 'flex', 
+                            alignItems: 'center', 
+                            mb: 0.5,
+                            justifyContent: { xs: 'center', sm: 'flex-start' }
+                          }}
+                        >
                           <Rating 
                             value={product.rating} 
                             readOnly 
@@ -400,130 +459,81 @@ function Home() {
       </Box>
 
       {/* Order Process Section */}
-      <Box sx={{ bgcolor: '#E0F7FA', py: 8 }}>  {/* Light cyan background */}
-        <Container>
-          <Grid container spacing={4} justifyContent="center">
-            <Grid item xs={12} sm={4}>
-              <Card
-                sx={{
-                  height: '100%',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  p: 3,
-                  textAlign: 'center',
-                  boxShadow: 'none',
-                  backgroundColor: 'transparent',
-                }}
-              >
-                <LocalDining 
-                  sx={{ 
-                    width: 80, 
-                    height: 80, 
-                    mb: 2,
-                    color: 'primary.main',
-                    p: 2,
-                    borderRadius: '50%',
-                    backgroundColor: 'rgba(76, 175, 80, 0.1)'
+      <Box sx={{ bgcolor: '#E0F7FA', py: { xs: 4, md: 8 } }}>
+        <Container maxWidth="lg">
+          <Grid container spacing={{ xs: 2, md: 4 }} justifyContent="center">
+            {[
+              {
+                icon: <LocalDining />,
+                title: "Choose Your Favorite",
+                description: "Pick Your Favorite Beverage Select your favorite beverage and enjoy the most authentic taste full of aroma."
+              },
+              {
+                icon: <LocationOn />,
+                title: "Place Your Address",
+                description: "Make your purchase, Place a Order, Order Now Order the top quality products and get the richness of real ingredients."
+              },
+              {
+                icon: <LocalShipping />,
+                title: "Payment & Delivery",
+                description: "Your products will be delivered without any delay. Pay the amount at the doorstep after the product reaches you."
+              }
+            ].map((step) => (
+              <Grid item xs={12} sm={6} md={4} key={step.title}>
+                <Card
+                  sx={{
+                    height: '100%',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    p: { xs: 2, sm: 3 },
+                    textAlign: 'center',
+                    boxShadow: 'none',
+                    backgroundColor: 'transparent',
                   }}
-                />
-                <Typography
-                  variant="h6"
-                  component="h3"
-                  color="primary.dark"
-                  gutterBottom
-                  sx={{ fontWeight: 'bold' }}
                 >
-                  Choose Your Favorite
-                </Typography>
-                <Typography color="text.secondary">
-                  Pick Your Favorite Beverage Select your favorite beverage and enjoy the most authentic taste full of aroma.
-                </Typography>
-              </Card>
-            </Grid>
-
-            <Grid item xs={12} sm={4}>
-              <Card
-                sx={{
-                  height: '100%',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  p: 3,
-                  textAlign: 'center',
-                  boxShadow: 'none',
-                  backgroundColor: 'transparent',
-                }}
-              >
-                <LocationOn 
-                  sx={{ 
-                    width: 80, 
-                    height: 80, 
-                    mb: 2,
-                    color: 'primary.main',
-                    p: 2,
-                    borderRadius: '50%',
-                    backgroundColor: 'rgba(76, 175, 80, 0.1)'
-                  }}
-                />
-                <Typography
-                  variant="h6"
-                  component="h3"
-                  color="primary.dark"
-                  gutterBottom
-                  sx={{ fontWeight: 'bold' }}
-                >
-                  Place Your Address
-                </Typography>
-                <Typography color="text.secondary">
-                  Make your purchase, Place a Order, Order Now Order the top quality products and get the richness of real ingredients.
-                </Typography>
-              </Card>
-            </Grid>
-
-            <Grid item xs={12} sm={4}>
-              <Card
-                sx={{
-                  height: '100%',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  p: 3,
-                  textAlign: 'center',
-                  boxShadow: 'none',
-                  backgroundColor: 'transparent',
-                }}
-              >
-                <LocalShipping 
-                  sx={{ 
-                    width: 80, 
-                    height: 80, 
-                    mb: 2,
-                    color: 'primary.main',
-                    p: 2,
-                    borderRadius: '50%',
-                    backgroundColor: 'rgba(76, 175, 80, 0.1)'
-                  }}
-                />
-                <Typography
-                  variant="h6"
-                  component="h3"
-                  color="primary.dark"
-                  gutterBottom
-                  sx={{ fontWeight: 'bold' }}
-                >
-                  Payment & Delivery
-                </Typography>
-                <Typography color="text.secondary">
-                  Your products will be delivered without any delay. Pay the amount at the doorstep after the product reaches you.
-                </Typography>
-              </Card>
-            </Grid>
+                  <Box
+                    sx={{
+                      width: { xs: 60, sm: 80 },
+                      height: { xs: 60, sm: 80 },
+                      mb: 2,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      borderRadius: '50%',
+                      backgroundColor: 'rgba(76, 175, 80, 0.1)',
+                      color: 'primary.main'
+                    }}
+                  >
+                    {step.icon}
+                  </Box>
+                  <Typography
+                    variant="h6"
+                    component="h3"
+                    color="primary.dark"
+                    gutterBottom
+                    sx={{ 
+                      fontWeight: 'bold',
+                      fontSize: { xs: '1.1rem', sm: '1.25rem' }
+                    }}
+                  >
+                    {step.title}
+                  </Typography>
+                  <Typography 
+                    color="text.secondary"
+                    sx={{
+                      fontSize: { xs: '0.875rem', sm: '1rem' }
+                    }}
+                  >
+                    {step.description}
+                  </Typography>
+                </Card>
+              </Grid>
+            ))}
           </Grid>
         </Container>
       </Box>
 
-      {/* Add the Footer component */}
       <Footer />
     </Box>
   );
